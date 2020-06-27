@@ -1,0 +1,35 @@
+.dialogs {
+    grid-area: b;
+    position: relative;
+    top: 100px;
+    background-color: darkorange;
+    width: 300px;
+    min-height: 100px;
+    padding-left: 100px;
+    border-radius: 5px;
+    margin: 50px;
+}
+
+.dialogs img {
+    width: 70px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    border-radius: 30px;
+}
+
+.name {
+    color: aqua;
+}
+
+.message {
+    color: whitesmoke;
+    padding-top: 10px;
+}
+
+.time {
+    color: whitesmoke;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

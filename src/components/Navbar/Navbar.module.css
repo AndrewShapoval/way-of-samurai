@@ -1,0 +1,11 @@
+.nav {
+    grid-area: n;
+    background-color: gainsboro;
+}
+
+.item {
+    color: cornflowerblue;
+}
+.item.active {
+    color: darkblue;
+}
