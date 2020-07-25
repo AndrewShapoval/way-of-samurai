@@ -1,17 +1,23 @@
 import React from 'react';
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ProfilePageType} from "../../redux/state"
 
-const Profile = () => {
+type PropsType = {
+    profilePage: ProfilePageType
+    addPost: (postMessage: string)=> void
+    updateNewPostText: (newText: string) => void
+}
+
+const Profile = (props: PropsType) => {
     return (
         <div className={s.content}>
-            <div>
-                <img src='https://cdn.pixabay.com/photo/2015/08/27/09/22/banner-909710_1280.jpg'/>
-            </div>
-            <div>
-                Ava + discription
-            </div>
-            <MyPosts/>
+            <ProfileInfo/>
+            <MyPosts posts={props.profilePage.posts}
+                     newPostText={props.profilePage.newPostText}
+                     addPost={props.addPost}
+                     updateNewPostText={props.updateNewPostText}/>
         </div>
     )
 }
