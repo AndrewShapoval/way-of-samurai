@@ -10,10 +10,6 @@ import {ActionsTypes, RootStateType} from "./redux/state";
 type PropsType = {
     state: RootStateType
     dispatch: (action: ActionsTypes) => void
-    // addPost: (postMessage: string) => void
-    // addMessage: (Message: string) => void
-    // updateNewPostText: (newText: string) => void
-    // updateNewMessage: (newMessage: string) => void
 }
 
 function App(props: PropsType) {
@@ -25,16 +21,11 @@ function App(props: PropsType) {
                 <div className='app-wrapper-content'>
                     <Route path='/Profile' render={() => <Profile
                         profilePage={props.state.profilePage}
-                        // updateNewPostText={props.updateNewPostText}
-                        // addPost={props.addPost}
-                        dispatch={props.dispatch}
-                    />}/>
+                        dispatch={props.dispatch}/>}/>
                     <Route path='/Dialogs' render={() => <Dialogs
                         dialogs={props.state.dialogsPage.dialogs}
                         messages={props.state.dialogsPage.messages}
                         newMessageText={props.state.dialogsPage.newMessageText}
-                        // addMessage={props.addMessage}
-                        // updateNewMessage={props.updateNewMessage}
                         dispatch={props.dispatch}/>}/>
                     {/*<Route path='/News' render={() => <Profile posts={props.state.profilePage.posts}/>}/>*/}
                     {/*<Route path='/Music' render={() => <Profile posts={props.state.profilePage.posts}/>}/>*/}
