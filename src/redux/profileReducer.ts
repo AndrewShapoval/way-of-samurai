@@ -1,32 +1,31 @@
 import {ActionsTypes, PostType, ProfilePageType} from "./store";
 
 let initialState: ProfilePageType = {
-        posts: [
-            {id: 1, message: 'How are you', likesCount: 10},
-            {id: 2, message: 'Well', likesCount: 23}
-        ],
-        newPostText: ''
-    }
+    posts: [
+        {id: 1, message: 'How are you', likesCount: 10},
+        {id: 2, message: 'Well', likesCount: 23}
+    ],
+    newPostText: ''
+}
 
 const profileReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
-        case "ADD-POST": {
+        case "ADD-POST":
             let newPost: PostType = {
                 id: 3,
                 message: state.newPostText,
                 likesCount: 0
             }
-            let stateCopy = {...state}
-            stateCopy.posts = [...state.posts]
-            stateCopy.posts.push(newPost)
-            stateCopy.newPostText = ""
-            return stateCopy
-        }
-        case "UPDATE-NEW-POST-TEXT": {
-            let stateCopy = {...state}
-            stateCopy.newPostText = action.newText;
-            return stateCopy
-        }
+            return  {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ""
+            }
+        case "UPDATE-NEW-POST-TEXT":
+            return  {
+                ...state,
+                newPostText: action.newText
+            }
         default:
             return state
     }

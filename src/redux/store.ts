@@ -1,5 +1,6 @@
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profileReducer";
 import dialogsReducer, {addMessageAC, updateNewMessageTextActionCreator} from "./dialogsReducer";
+import {followAC, unFollowAC} from "./usersReducer";
 
 export type PostType = {
     id: number
@@ -33,6 +34,15 @@ export type RootStateType = {
     dialogsPage: DialogsPageType
 }
 
+export type ActionsTypes =
+    ReturnType<typeof addPostActionCreator> |
+    ReturnType<typeof updateNewPostTextActionCreator> |
+    ReturnType<typeof addMessageAC> |
+    ReturnType<typeof updateNewMessageTextActionCreator> |
+    ReturnType<typeof followAC> |
+    ReturnType<typeof unFollowAC>
+
+
 export type StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
@@ -40,12 +50,6 @@ export type StoreType = {
     subscribe: (callback: () => void) => void
     dispatch: (action: ActionsTypes) => void
 }
-
-export type ActionsTypes =
-    ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostTextActionCreator> |
-    ReturnType<typeof addMessageAC> |
-    ReturnType<typeof updateNewMessageTextActionCreator>
 
 // let store: StoreType = {
 //     _state: {
