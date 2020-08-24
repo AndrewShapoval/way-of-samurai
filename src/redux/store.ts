@@ -1,6 +1,6 @@
-import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profileReducer";
-import dialogsReducer, {addMessageAC, updateNewMessageTextActionCreator} from "./dialogsReducer";
-import {followAC, unFollowAC} from "./usersReducer";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "./profileReducer";
+import {addMessageAC, updateNewMessageTextActionCreator} from "./dialogsReducer";
+import {followAC, setUsersAC, unFollowAC} from "./usersReducer";
 
 export type PostType = {
     id: number
@@ -29,10 +29,10 @@ export type DialogsPageType = {
     newMessageText: string
 }
 
-export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-}
+// export type RootStateType = {
+//     profilePage: ProfilePageType
+//     dialogsPage: DialogsPageType
+// }
 
 export type ActionsTypes =
     ReturnType<typeof addPostActionCreator> |
@@ -40,16 +40,17 @@ export type ActionsTypes =
     ReturnType<typeof addMessageAC> |
     ReturnType<typeof updateNewMessageTextActionCreator> |
     ReturnType<typeof followAC> |
-    ReturnType<typeof unFollowAC>
+    ReturnType<typeof unFollowAC> |
+    ReturnType<typeof setUsersAC>
 
 
-export type StoreType = {
-    _state: RootStateType
-    _callSubscriber: () => void
-    getState: () => RootStateType
-    subscribe: (callback: () => void) => void
-    dispatch: (action: ActionsTypes) => void
-}
+// export type StoreType = {
+//     _state: RootStateType
+//     _callSubscriber: () => void
+//     getState: () => RootStateType
+//     subscribe: (callback: () => void) => void
+//     dispatch: (action: ActionsTypes) => void
+// }
 
 // let store: StoreType = {
 //     _state: {
