@@ -2,6 +2,10 @@ import {ActionsTypes} from "./store";
 
 export type initialStateType = {
     users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
 }
 
 export type UserType = {
@@ -19,32 +23,11 @@ type locationType = {
 }
 
 let initialState: initialStateType = {
-    users: [
-        // {
-        //     id: 1,
-        //     followed: true,
-        //     name: 'Andrew',
-        //     status: 'Cool',
-        //     location: {country: 'Russia', city: 'Moscow'},
-        //     photos: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS7WTP-tHQOZbAbB0ZmTDrs7XX3qjexEsykECZ5K5iYrBxndlD3&usqp=CAU'
-        // },
-        // {
-        //     id: 2,
-        //     followed: false,
-        //     name: 'Sasha',
-        //     status: 'Cool too',
-        //     location: {country: 'Belarus', city: 'Minsk'},
-        //     photos: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS7WTP-tHQOZbAbB0ZmTDrs7XX3qjexEsykECZ5K5iYrBxndlD3&usqp=CAU'
-        // },
-        // {
-        //     id: 3,
-        //     followed: true,
-        //     name: 'Tony',
-        //     status: 'Cool too',
-        //     location: {country: 'Ukraine', city: 'Kiev'},
-        //     photos: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS7WTP-tHQOZbAbB0ZmTDrs7XX3qjexEsykECZ5K5iYrBxndlD3&usqp=CAU'
-        // },
-    ],
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: false
 }
 
 const usersReducer = (state = initialState, action: ActionsTypes) => {
@@ -71,7 +54,19 @@ const usersReducer = (state = initialState, action: ActionsTypes) => {
             }
         case 'SET_USERS':
             return {
-                ...state, users: [...state.users, ...action.users]
+                ...state, users: action.users
+            }
+        case 'SET_CURRENT_PAGE':
+            return {
+                ...state, currentPage: action.currentPage
+            }
+        case "SET_TOTAL_USERS_COUNT":
+            return {
+                ...state, totalUsersCount: action.totalUsersCount
+            }
+        case "TOGGLE_IS_FETCHING":
+            return {
+                ...state, isFetching: action.isFetching
             }
         default:
             return state
@@ -96,6 +91,27 @@ export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: 'SET_USERS',
         users
+    } as const
+}
+
+export const setCurrentPageAC = (pageNumber: number) => {
+    return {
+        type: 'SET_CURRENT_PAGE',
+        currentPage: pageNumber
+    } as const
+}
+
+export const setUsersTotalCountAC = (totalUsersCount: number) => {
+    return {
+        type: 'SET_TOTAL_USERS_COUNT',
+        totalUsersCount
+    } as const
+}
+
+export const ToggleIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: 'TOGGLE_IS_FETCHING',
+        isFetching
     } as const
 }
 
