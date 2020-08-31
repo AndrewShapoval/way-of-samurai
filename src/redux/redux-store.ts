@@ -12,6 +12,6 @@ const reducers = combineReducers({
 })
 
 const store = createStore(reducers);
-export type DispatchType = typeof store.dispatch
+// export type DispatchType = typeof store.dispatch
 
 export default store

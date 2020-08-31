@@ -1,11 +1,12 @@
-import {addPostActionCreator, updateNewPostTextActionCreator} from "./profileReducer";
-import {addMessageAC, updateNewMessageTextActionCreator} from "./dialogsReducer";
+import {addPost, onPostChange, setUserProfile} from "./profileReducer";
+import {addMessage, onChangeMessage} from "./dialogsReducer";
 import {
-    followAC,
-    setCurrentPageAC,
-    setUsersAC,
-    setUsersTotalCountAC, ToggleIsFetchingAC,
-    unFollowAC
+    follow,
+    setCurrentPage,
+    setUsers,
+    setTotalUsersCount,
+    toggleIsFetching,
+    unFollow
 } from "./usersReducer";
 
 export type PostType = {
@@ -27,6 +28,7 @@ export type MessageType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
+    profile: any
 }
 
 export type DialogsPageType = {
@@ -41,16 +43,17 @@ export type DialogsPageType = {
 // }
 
 export type ActionsTypes =
-    ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostTextActionCreator> |
-    ReturnType<typeof addMessageAC> |
-    ReturnType<typeof updateNewMessageTextActionCreator> |
-    ReturnType<typeof followAC> |
-    ReturnType<typeof unFollowAC> |
-    ReturnType<typeof setUsersAC> |
-    ReturnType<typeof setCurrentPageAC> |
-    ReturnType<typeof setUsersTotalCountAC> |
-    ReturnType<typeof ToggleIsFetchingAC>
+    ReturnType<typeof addPost> |
+    ReturnType<typeof onPostChange> |
+    ReturnType<typeof addMessage> |
+    ReturnType<typeof onChangeMessage> |
+    ReturnType<typeof follow> |
+    ReturnType<typeof unFollow> |
+    ReturnType<typeof setUsers> |
+    ReturnType<typeof setCurrentPage> |
+    ReturnType<typeof setTotalUsersCount> |
+    ReturnType<typeof toggleIsFetching> |
+    ReturnType<typeof setUserProfile>
 
 
 // export type StoreType = {
