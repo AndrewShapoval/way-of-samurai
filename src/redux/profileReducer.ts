@@ -49,7 +49,7 @@ export const onPostChange = (newText: string) => {
     } as const
 }
 
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: string) => {
     return {
         type: 'SET_USER_PROFILE',
         profile
