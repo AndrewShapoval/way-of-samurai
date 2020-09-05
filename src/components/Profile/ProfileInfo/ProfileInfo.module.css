@@ -1,6 +1,9 @@
 .wrapper {
     width: 500px;
 }
+.wrapper img {
+    width: 1000px;
+}
 
 .descriptionBlock {
     padding: 10px;

@@ -23,7 +23,6 @@ const Dialogs = (props: PropsType) => {
     let onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangeMessage(e.currentTarget.value)
     }
-    debugger
 
     return (
         <div className={s.dialogs}>
