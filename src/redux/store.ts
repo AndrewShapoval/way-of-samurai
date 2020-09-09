@@ -6,7 +6,7 @@ import {
     setUsers,
     setTotalUsersCount,
     toggleIsFetching,
-    unFollow
+    unFollow, toggleFollowingProgress
 } from "./usersReducer";
 import {setAuthUserData} from "./authReducer";
 
@@ -55,7 +55,8 @@ export type ActionsTypes =
     ReturnType<typeof setTotalUsersCount> |
     ReturnType<typeof toggleIsFetching> |
     ReturnType<typeof setUserProfile> |
-    ReturnType<typeof setAuthUserData>
+    ReturnType<typeof setAuthUserData> |
+    ReturnType<typeof toggleFollowingProgress>
 
 
 // export type StoreType = {
