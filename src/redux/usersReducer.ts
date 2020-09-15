@@ -1,5 +1,5 @@
 import {ActionsTypes} from "./store";
-import {usersApi} from "../api/api";
+import {usersAPI} from "../api/api";
 import {AppStateType} from "./redux-store";
 import {Dispatch} from "redux";
 
@@ -117,7 +117,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 export const getUsers = (currentPage: number, pageSize: number) => {
     return (dispatch: Dispatch<ActionsTypes>, getState: () => AppStateType) => {
         dispatch(toggleIsFetching(true))
-        usersApi.getUsers(currentPage, pageSize)
+        usersAPI.getUsers(currentPage, pageSize)
             .then(data => {
                 dispatch(toggleIsFetching(false))
                 dispatch(setUsers(data.items))
@@ -129,7 +129,7 @@ export const getUsers = (currentPage: number, pageSize: number) => {
 export const follow = (userId: number): any => {
     return (dispatch: Dispatch<ActionsTypes>) => {
         dispatch(toggleFollowingProgress(true, userId))
-        usersApi.postFollow(userId)
+        usersAPI.postFollow(userId)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(followSuccess(userId))
@@ -142,7 +142,7 @@ export const follow = (userId: number): any => {
 export const unFollow = (userId: number): any => {
     return (dispatch: Dispatch<ActionsTypes>) => {
         dispatch(toggleFollowingProgress(true, userId))
-        usersApi.deleteUnFollow(userId)
+        usersAPI.deleteUnFollow(userId)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(unFollowSuccess(userId))
