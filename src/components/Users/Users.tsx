@@ -49,26 +49,10 @@ export let Users = (props: PropsUsersType) => {
                                 ? <button disabled={props.followIsProgress.some((id) => id === u.id)}
                                           onClick={() => {
                                               props.unFollow(u.id)
-                                              // props.toggleFollowingProgress(true, u.id)
-                                              // usersApi.deleteUnFollow(u.id)
-                                              //     .then(response => {
-                                              //         if (response.data.resultCode === 0) {
-                                              //             props.unFollow(u.id)
-                                              //         }
-                                              //         props.toggleFollowingProgress(false, u.id)
-                                              //     })
                                           }}>Un follow</button>
                                 : <button disabled={props.followIsProgress.some((id) => id === u.id)}
                                           onClick={() => {
                                               props.follow(u.id)
-                                              // props.toggleFollowingProgress(true, u.id)
-                                              // usersApi.postFollow(u.id)
-                                              //     .then(response => {
-                                              //         if (response.data.resultCode === 0) {
-                                              //             props.follow(u.id)
-                                              //         }
-                                              //         props.toggleFollowingProgress(false, u.id)
-                                              //     })
                                           }}>Follow</button>}
                         </div>
                     </span>

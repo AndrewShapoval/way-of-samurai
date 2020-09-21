@@ -17,4 +17,5 @@ const reducers = combineReducers({
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 export type DispatchType = typeof store.dispatch
 
+
 export default store
