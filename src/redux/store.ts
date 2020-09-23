@@ -30,6 +30,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     profile: any
+    status: string
 }
 
 export type DialogsPageType = {
