@@ -54,13 +54,14 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     status: state.profilePage.status
 })
 
-export default compose(connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {
+export default compose(
+    WithAuthRedirect,
+    withRouter,
+    connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {
         getUserProfile,
         getStatus,
         updateStatus
-    }),
-    withRouter,
-    WithAuthRedirect
+    })
 )(ProfileContainer)
 
 // let WithUrlDataContainerComponent = withRouter(ProfileContainer)

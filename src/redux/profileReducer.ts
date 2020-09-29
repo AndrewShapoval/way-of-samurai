@@ -7,7 +7,6 @@ let initialState: ProfilePageType = {
         {id: 1, message: 'How are you', likesCount: 10},
         {id: 2, message: 'Well', likesCount: 23}
     ],
-    newPostText: '',
     profile: null,
     status: ""
 }
@@ -17,18 +16,12 @@ const profileReducer = (state = initialState, action: ActionsTypes) => {
         case "ADD-POST":
             let newPost: PostType = {
                 id: 3,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             }
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ""
-            }
-        case "UPDATE-NEW-POST-TEXT":
-            return {
-                ...state,
-                newPostText: action.newText
             }
         case "SET_USER_PROFILE":
             return {
@@ -44,16 +37,9 @@ const profileReducer = (state = initialState, action: ActionsTypes) => {
     }
 }
 
-export const addPost = () => {
+export const addPost = (NewPostText: string) => {
     return {
-        type: 'ADD-POST',
-    } as const
-}
-
-export const onPostChange = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
+        type: 'ADD-POST', NewPostText
     } as const
 }
 

@@ -1,5 +1,5 @@
-import {addPost, onPostChange, setUserProfile} from "./profileReducer";
-import {addMessage, onChangeMessage} from "./dialogsReducer";
+import {addPost, setUserProfile} from "./profileReducer";
+import {addMessage} from "./dialogsReducer";
 import {
     follow,
     setCurrentPage,
@@ -28,7 +28,6 @@ export type MessageType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
     profile: any
     status: string
 }
@@ -36,7 +35,6 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText: string
 }
 
 // export type RootStateType = {
@@ -46,9 +44,7 @@ export type DialogsPageType = {
 
 export type ActionsTypes =
     ReturnType<typeof addPost> |
-    ReturnType<typeof onPostChange> |
     ReturnType<typeof addMessage> |
-    ReturnType<typeof onChangeMessage> |
     ReturnType<typeof follow> |
     ReturnType<typeof unFollow> |
     ReturnType<typeof setUsers> |

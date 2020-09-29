@@ -1,6 +1,6 @@
 import React from "react";
-import reduxForm, {InjectedFormProps} from "redux-form";
-import Field from "redux-form";
+import {reduxForm, InjectedFormProps} from "redux-form";
+import {Field} from "redux-form";
 
 type FormDataType = {
     login: string
