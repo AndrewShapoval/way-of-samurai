@@ -37,9 +37,10 @@ const profileReducer = (state = initialState, action: ActionsTypes) => {
     }
 }
 
-export const addPost = (NewPostText: string) => {
+export const addPost = (newPostText: string) => {
+    debugger
     return {
-        type: 'ADD-POST', NewPostText
+        type: 'ADD-POST', newPostText
     } as const
 }
 
