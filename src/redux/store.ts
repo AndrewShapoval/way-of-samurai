@@ -1,4 +1,4 @@
-import {addPost, setUserProfile} from "./profileReducer";
+import {addPost, savePhotoSuccess, setUserProfile} from "./profileReducer";
 import {addMessage} from "./dialogsReducer";
 import {
     follow,
@@ -55,7 +55,8 @@ export type ActionsTypes =
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setAuthUserData> |
     ReturnType<typeof toggleFollowingProgress> |
-    ReturnType<typeof initializedSuccess>
+    ReturnType<typeof initializedSuccess> |
+    ReturnType<typeof savePhotoSuccess>
 
 
 // export type StoreType = {

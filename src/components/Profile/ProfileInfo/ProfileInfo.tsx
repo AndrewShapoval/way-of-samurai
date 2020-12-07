@@ -1,14 +1,8 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './ProfileInfo.module.css'
 import {Preloader} from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/noName.png"
 import {ProfileStatus} from "./ProfileStatus";
-
-type PropsType = {
-    profile: any
-    status: string
-    updateStatus: (status: string) => void
-}
 
 const ProfileInfo = (props: PropsType) => {
 
@@ -16,13 +10,17 @@ const ProfileInfo = (props: PropsType) => {
         return <Preloader/>
     }
 
+    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            props.savePhoto(e.target.files[0])
+        }
+    }
+
     return (
         <div>
-            {/*<div className={s.wrapper}>*/}
-            {/*    <img src='https://cdn.pixabay.com/photo/2015/08/27/09/22/banner-909710_1280.jpg'/>*/}
-            {/*</div>*/}
+            {props.isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large !== null ? props.profile.photos.large : userPhoto}/>
+                <img src={props.profile.photos.large || userPhoto}/>
                 <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
@@ -30,3 +28,11 @@ const ProfileInfo = (props: PropsType) => {
 }
 
 export default ProfileInfo;
+
+type PropsType = {
+    profile: any
+    status: string
+    updateStatus: (status: string) => void
+    isOwner: boolean
+    savePhoto: (e: File) => void
+}

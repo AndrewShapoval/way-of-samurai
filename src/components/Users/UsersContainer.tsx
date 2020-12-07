@@ -40,7 +40,6 @@ class UsersContainer extends React.Component<MapStatePropsType & MapDispatchProp
 
     // constructor(props: PropsType) {
     //     super(props);
-    //     debugger
     //     axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
     //         this.props.setUsers(response.data.items)
     //     })
