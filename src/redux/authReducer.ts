@@ -1,6 +1,6 @@
 import {ActionsTypes} from "./store";
 import {Dispatch} from "redux";
-import {authApi} from "../api/api";
+import {authApi, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
 export type initialStateType = {
@@ -9,6 +9,7 @@ export type initialStateType = {
     login: string | null
     isFetching: boolean
     isAuth: boolean
+    captchaUrl: string | null
 }
 
 let initialState: initialStateType = {
@@ -16,7 +17,8 @@ let initialState: initialStateType = {
     email: null,
     login: null,
     isFetching: false,
-    isAuth: false
+    isAuth: false,
+    captchaUrl: null
 }
 
 const authReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
@@ -26,6 +28,8 @@ const authReducer = (state: initialStateType = initialState, action: ActionsType
                 ...state,
                 ...action.payload,
             }
+        case 'AUTH/SET_CAPTCHA_URL':
+            return {...state, captchaUrl: action.captchaUrl}
         default:
             return state
     }
@@ -38,6 +42,8 @@ export const setAuthUserData = (id: number | null, email: string | null, login: 
     } as const
 }
 
+export const setCaptchaUrl = (captchaUrl: string) => ({type: 'AUTH/SET_CAPTCHA_URL', captchaUrl} as const)
+
 export const getAuthUserData = () => {
     return async (dispatch: Dispatch<ActionsTypes>) => {
         let response = await authApi.me()
@@ -48,12 +54,15 @@ export const getAuthUserData = () => {
     }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean) => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => {
     return async (dispatch: Dispatch<ActionsTypes>) => {
-        let response = await authApi.login(email, password, rememberMe)
+        const response = await authApi.login(email, password, rememberMe, captcha)
         if (response.data.resultCode === 0) {
             dispatch(getAuthUserData())
         } else {
+            if (response.data.resultCode === 10) {
+                dispatch(getCaptchaUrl())
+            }
             let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
             dispatch(stopSubmit("Login", {_error: message}))
         }
@@ -62,10 +71,18 @@ export const login = (email: string, password: string, rememberMe: boolean) => {
 
 export const logout = () => {
     return async (dispatch: Dispatch<ActionsTypes>) => {
-        let response = await authApi.logout()
+        const response = await authApi.logout()
         if (response.data.resultCode === 0) {
             dispatch(setAuthUserData(null, null, null, false))
         }
+    }
+}
+
+export const getCaptchaUrl = () => {
+    return async (dispatch: Dispatch<ActionsTypes>) => {
+        const response = await securityAPI.getCaptchaUrl()
+        const captchaUrl = response.data.url
+            dispatch(setCaptchaUrl(captchaUrl))
     }
 }
 

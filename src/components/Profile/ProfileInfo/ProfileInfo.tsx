@@ -19,13 +19,19 @@ const ProfileInfo = (props: PropsType) => {
         }
     }
 
+    const onSubmit = (formData: any) => {
+        props.saveProfile(formData)
+            // @ts-ignore
+            .then(() => {setEditMode(false)})
+    }
+
     return (
         <div>
             {props.isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large || userPhoto}/>
                 {editMode
-                    ? <ProfileDataForm/>
+                    ? <ProfileDataForm initialValues={props.profile} onSubmit={onSubmit}/>
                     : <ProfileData profile={props.profile}
                                    isOwner={props.isOwner}
                                    goToEditMode={() => setEditMode(true)}/>}
@@ -44,7 +50,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}: any) => {
             <div><b>Looking for a job: </b> {profile.lookingForAJob ? "Yes" : "No"}</div>
             <div><b>Skills: </b> {profile.lookingForAJobDescription}</div>
             <div><b>Contacts:</b> {Object.keys(profile.contacts).map(key =>
-                <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+                profile.contacts[key] ? <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/> : null
             )}</div>
         </div>
     )
@@ -64,4 +70,5 @@ type PropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (e: File) => void
+    saveProfile: (formData: any) => void
 }

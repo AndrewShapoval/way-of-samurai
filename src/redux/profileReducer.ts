@@ -1,6 +1,7 @@
 import {ActionsTypes, PostType, ProfilePageType} from "./store";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 let initialState: ProfilePageType = {
     posts: [
@@ -77,6 +78,20 @@ export const savePhoto = (file: File) => {
         let response = await profileAPI.savePhoto(file)
         if (response.data.resultCode === 0) {
             dispatch(savePhotoSuccess(response.data.data.photos))
+        }
+    }
+}
+
+export const saveProfile = (formData: any) => {
+    return async (dispatch: Dispatch<ActionsTypes>, getState: any) => {
+        const userId = getState().auth.id
+        let response = await profileAPI.saveProfile(formData)
+        if (response.data.resultCode === 0) {
+            dispatch(getUserProfile(userId))
+        } else {
+            let message = response.data.messages[0]
+            dispatch(stopSubmit("edit-profile", {_error: message}))
+            return Promise.reject(message)
         }
     }
 }
