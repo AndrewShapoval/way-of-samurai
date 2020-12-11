@@ -12,6 +12,7 @@ import {withRouter} from "react-router-dom";
 import {initializeApp} from "./redux/appReducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
 import {WithSuspense} from "./hoc/WithSuspense";
+import {Redirect} from "react-router-dom";
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 
@@ -37,6 +38,7 @@ class App extends React.Component<MapDispatchPropsType & MapStateToPropsType> {
                 <HeaderContainer/>
                 <NavBar/>
                 <div className='app-wrapper-content'>
+                    <Route exact path='/' render={()=> <Redirect to={'/profile'}/>}/>
                     <Route path='/profile:userId?' render={WithSuspense(ProfileContainer)}/>
                     <Route path='/Dialogs' render={WithSuspense(DialogsContainer)}/>
                     <Route path='/Users' render={() => <UsersContainer/>}/>

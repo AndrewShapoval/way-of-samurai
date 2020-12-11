@@ -9,7 +9,7 @@ import {
     unFollow, toggleFollowingProgress
 } from "./usersReducer";
 import {setAuthUserData, setCaptchaUrl} from "./authReducer";
-import {initializedSuccess} from "./appReducer";
+import {initializedSuccess, setAppError} from "./appReducer";
 
 export type PostType = {
     id: number
@@ -57,7 +57,8 @@ export type ActionsTypes =
     ReturnType<typeof toggleFollowingProgress> |
     ReturnType<typeof initializedSuccess> |
     ReturnType<typeof savePhotoSuccess> |
-    ReturnType<typeof setCaptchaUrl>
+    ReturnType<typeof setCaptchaUrl> |
+    ReturnType<typeof setAppError>
 
 
 // export type StoreType = {

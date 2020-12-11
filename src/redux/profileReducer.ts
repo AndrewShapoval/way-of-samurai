@@ -2,6 +2,7 @@ import {ActionsTypes, PostType, ProfilePageType} from "./store";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {setAppError} from "./appReducer";
 
 let initialState: ProfilePageType = {
     posts: [
@@ -18,7 +19,8 @@ const profileReducer = (state = initialState, action: ActionsTypes) => {
             let newPost: PostType = {
                 id: 3,
                 message: action.newPostText,
-                likesCount: 0}
+                likesCount: 0
+            }
             return {...state, posts: [...state.posts, newPost],}
         case "SET_USER_PROFILE":
             return {...state, profile: action.profile}
@@ -66,9 +68,13 @@ export const getStatus = (userId: string) => {
 
 export const updateStatus = (status: string) => {
     return async (dispatch: Dispatch<ActionsTypes>) => {
-        let response = await profileAPI.updateStatus(status)
-        if (response.data.resultCode === 0) {
-            dispatch(setStatus(status))
+        try {
+            let response = await profileAPI.updateStatus(status)
+            if (response.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        } catch (error) {
+            dispatch(setAppError(error.message))
         }
     }
 }

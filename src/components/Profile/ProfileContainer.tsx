@@ -9,7 +9,6 @@ import {compose} from "redux";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 class ProfileContainer extends React.Component<PropsType> {
-
     refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
@@ -54,7 +53,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 export default compose(
     WithAuthRedirect,
-    withRouter,
+    // withRouter,
     connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps, {
         getUserProfile,
         getStatus,
